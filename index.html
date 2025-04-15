@@ -20,48 +20,75 @@
       max-height: 100%;
       object-fit: contain;
     }
+    #debug {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      font-size: 14px;
+      color: white;
+      font-family: monospace;
+    }
   </style>
 </head>
 <body>
   <div id="display">Carregando mídia...</div>
+  <div id="debug"></div>
 
   <script>
-    const arquivos = [
-      "tv-conteudo/imagens/01_cartaz.jpg",
-      "tv-conteudo/videos/jornal_afya.mp4"
-    ];
-
-    let index = 0;
     const container = document.getElementById("display");
+    const debug = document.getElementById("debug");
 
-    function mostrarProximo() {
-      container.innerHTML = "";
-      const arquivo = arquivos[index];
-      const extensao = arquivo.split('.').pop().toLowerCase();
+    async function carregarArquivos() {
+      try {
+        const resposta = await fetch("/.netlify/functions/listarArquivos");
+        const arquivos = await resposta.json();
 
-      if (extensao === "mp4") {
-        const video = document.createElement("video");
-        video.src = arquivo;
-        video.autoplay = true;
-        video.muted = true;
-        video.playsInline = true;
-        video.onended = proximo;
-        container.appendChild(video);
-        video.play();
-      } else {
-        const img = document.createElement("img");
-        img.src = arquivo;
-        container.appendChild(img);
-        setTimeout(proximo, 35000);
+        debug.textContent = arquivos.length + " arquivos encontrados.";
+
+        if (!arquivos.length) {
+          container.innerHTML = "<p style='color:red'>Nenhum conteúdo encontrado.</p>";
+          return;
+        }
+
+        let index = 0;
+
+        function mostrarProximo() {
+          container.innerHTML = "";
+          const item = arquivos[index];
+
+          if (item.tipo === "imagem") {
+            const img = document.createElement("img");
+            img.src = item.url;
+            container.appendChild(img);
+            setTimeout(proximo, 35000);
+          } else if (item.tipo === "video") {
+            const video = document.createElement("video");
+            video.src = item.url;
+            video.autoplay = true;
+            video.muted = true;
+            video.playsInline = true;
+            video.onended = proximo;
+            container.appendChild(video);
+            video.play();
+          } else {
+            proximo();
+          }
+        }
+
+        function proximo() {
+          index = (index + 1) % arquivos.length;
+          mostrarProximo();
+        }
+
+        mostrarProximo();
+      } catch (e) {
+        debug.textContent = "Erro ao carregar arquivos.";
+        container.innerHTML = "<p style='color:red'>Erro ao carregar os arquivos.</p>";
+        console.error(e);
       }
     }
 
-    function proximo() {
-      index = (index + 1) % arquivos.length;
-      mostrarProximo();
-    }
-
-    mostrarProximo();
+    carregarArquivos();
   </script>
 </body>
 </html>
