@@ -1,29 +1,31 @@
+const fs = require('fs');
+const path = require('path');
 
-const fs = require("fs");
-const path = require("path");
+function scanDir(folderPath) {
+  const files = [];
+  if (!fs.existsSync(folderPath)) return files;
 
-const base = "tv-conteudo";
-const pastas = ["imagens", "videos"];
-let arquivos = [];
+  fs.readdirSync(folderPath).forEach(file => {
+    const fullPath = path.join(folderPath, file);
+    const stat = fs.statSync(fullPath);
+    if (stat.isFile()) {
+      const ext = path.extname(file).toLowerCase();
+      const tipo = ext === '.mp4' ? 'video' : 'imagem';
+      files.push({
+        nome: file,
+        tipo,
+        url: `tv-conteudo/${tipo === 'video' ? 'videos' : 'imagens'}/${file}`
+      });
+    }
+  });
 
-for (const pasta of pastas) {
-  const dir = path.join(__dirname, base, pasta);
-  if (!fs.existsSync(dir)) continue;
-  const lista = fs.readdirSync(dir);
-  for (const nome of lista) {
-    const tipo = nome.toLowerCase().endsWith(".mp4") ? "video" : "imagem";
-    arquivos.push({
-      nome,
-      tipo,
-      url: `/${base}/${pasta}/${nome}`
-    });
-  }
+  return files;
 }
 
-arquivos.sort((a, b) => a.nome.localeCompare(b.nome));
+const imagens = scanDir('tv-conteudo/imagens');
+const videos = scanDir('tv-conteudo/videos');
+const todos = [...imagens, ...videos];
 
-fs.writeFileSync(
-  path.join(__dirname, base, "data.json"),
-  JSON.stringify(arquivos, null, 2)
-);
-console.log("✅ data.json gerado com sucesso!");
+console.log('Arquivos encontrados:', todos); // <--- Esse log ajuda
+
+fs.writeFileSync('tv-conteudo/data.json', JSON.stringify(todos, null, 2));
