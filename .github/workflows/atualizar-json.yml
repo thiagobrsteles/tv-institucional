@@ -1,33 +1,36 @@
-
 name: Atualizar data.json
 
 on:
   push:
     paths:
-      - 'tv-conteudo/imagens/**'
-      - 'tv-conteudo/videos/**'
-      - '.github/workflows/**'
-      - 'gerar-json.js'
+      - 'tv-conteudo/**'
+  workflow_dispatch:
 
 jobs:
   gerar-json:
     runs-on: ubuntu-latest
+
     steps:
       - name: Clonar repositório
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Instalar Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Gerar data.json
+      - name: Executar script para gerar data.json
         run: node gerar-json.js
+
+      - name: Configurar Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Commit e push do data.json
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
           git add tv-conteudo/data.json
-          git commit -m "🔁 Atualizando data.json automaticamente" || echo "Nenhuma alteração"
+          git commit -m "Atualização automática do data.json"
           git push
