@@ -1,0 +1,12 @@
+[
+  {
+    "nome": "jornal.jpg",
+    "tipo": "imagem",
+    "url": "tv-conteudo/imagens/jornal.jpg"
+  },
+  {
+    "nome": "jornal-afyaczs.mp4",
+    "tipo": "video",
+    "url": "tv-conteudo/videos/jornal-afyaczs.mp4"
+  }
+]
