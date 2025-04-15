@@ -23,12 +23,14 @@ jobs:
         run: node gerar-json.js
 
       - name: Commit e push do data.json
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}
-          git add tv-conteudo/data.json
-          git commit -m "Atualizando data.json automaticamente"
-          git push origin HEAD:${{ github.ref_name }}
+  env:
+    GH_PAT: ${{ secrets.GH_PAT }}
+  run: |
+    git config --global user.name "github-actions"
+    git config --global user.email "github-actions@users.noreply.github.com"
+    git remote set-url origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}
+    git pull origin ${{ github.ref_name }}
+    git add tv-conteudo/data.json
+    git commit -m "Atualizando data.json automaticamente" || echo "Nada para commitar"
+    git push origin HEAD:${{ github.ref_name }}
+
