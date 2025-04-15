@@ -2,45 +2,51 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>TV Institucional</title>
   <style>
-    body {
-      margin: 0;
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100vw;
       height: 100vh;
+      background-color: black;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     img, video {
       max-width: 100%;
       max-height: 100%;
+      object-fit: contain;
     }
-    #container {
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    #debug {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      font-size: 14px;
+      color: white;
+      font-family: monospace;
     }
   </style>
 </head>
 <body>
-  <div id="container">Carregando mídia...</div>
+  <div id="display">Carregando mídia...</div>
+  <div id="debug"></div>
 
   <script>
-    const container = document.getElementById("container");
+    const container = document.getElementById("display");
+    const debug = document.getElementById("debug");
 
     async function carregarArquivos() {
       try {
         const resposta = await fetch("tv-conteudo/data.json");
         const arquivos = await resposta.json();
 
+        debug.textContent = arquivos.length + " arquivos encontrados.";
+
         if (!arquivos.length) {
-          container.innerHTML = "<p style='color:white;font-family:sans-serif;'>Nenhum conteúdo encontrado</p>";
+          container.innerHTML = "<p style='color:red'>Nenhum conteúdo encontrado.</p>";
           return;
         }
 
@@ -70,17 +76,15 @@
         }
 
         function proximo() {
-          index++;
-          if (index < arquivos.length) {
-            mostrarProximo();
-          } else {
-            location.reload(); // reinicia o ciclo
-          }
+          index = (index + 1) % arquivos.length;
+          mostrarProximo();
         }
 
         mostrarProximo();
-      } catch (erro) {
-        container.innerHTML = "<p style='color:white;font-family:sans-serif;'>Erro ao carregar arquivos</p>";
+      } catch (e) {
+        debug.textContent = "Erro ao carregar arquivos.";
+        container.innerHTML = "<p style='color:red'>Erro ao carregar os arquivos.</p>";
+        console.error(e);
       }
     }
 
