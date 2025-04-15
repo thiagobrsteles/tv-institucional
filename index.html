@@ -40,7 +40,7 @@
 
     async function carregarArquivos() {
       try {
-        const resposta = await fetch("/.netlify/functions/listarArquivos");
+        const resposta = await fetch("tv-conteudo/data.json");
         const arquivos = await resposta.json();
 
         debug.textContent = arquivos.length + " arquivos encontrados.";
