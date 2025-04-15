@@ -1,7 +1,22 @@
 [
   {
-    "nome": "jornal-afyaczs.mp4",
+    "nome": "01-jornal-afyaczs.mp4",
     "tipo": "video",
-    "url": "tv-conteudo/videos/jornal-afyaczs.mp4"
+    "url": "tv-conteudo/videos/01-jornal-afyaczs.mp4"
+  },
+  {
+    "nome": "02-processos-seletivos.mp4",
+    "tipo": "video",
+    "url": "tv-conteudo/videos/02-processos-seletivos.mp4"
+  },
+  {
+    "nome": "03-amigo-indica.mp4",
+    "tipo": "video",
+    "url": "tv-conteudo/videos/03-amigo-indica.mp4"
+  },
+  {
+    "nome": "04-financiamento.mp4",
+    "tipo": "video",
+    "url": "tv-conteudo/videos/04-financiamento.mp4"
   }
 ]
