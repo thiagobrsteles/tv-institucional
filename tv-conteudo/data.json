@@ -1,12 +1,17 @@
 [
   {
-    "nome": "2-premiacao.png",
+    "nome": "1-cpa.png",
     "tipo": "imagem",
-    "url": "tv-conteudo/imagens/2-premiacao.png"
+    "url": "tv-conteudo/imagens/1-cpa.png"
   },
   {
-    "nome": "1-cpa-25-1.mp4",
+    "nome": "02-amigo-indica.mp4",
     "tipo": "video",
-    "url": "tv-conteudo/videos/1-cpa-25-1.mp4"
+    "url": "tv-conteudo/videos/02-amigo-indica.mp4"
+  },
+  {
+    "nome": "03-financiamento.mp4",
+    "tipo": "video",
+    "url": "tv-conteudo/videos/03-financiamento.mp4"
   }
 ]
