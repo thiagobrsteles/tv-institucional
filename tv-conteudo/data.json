@@ -5,18 +5,23 @@
     "url": "tv-conteudo/imagens/1-cpa.png"
   },
   {
-    "nome": "02-amigo-indica.mp4",
-    "tipo": "video",
-    "url": "tv-conteudo/videos/02-amigo-indica.mp4"
+    "nome": "2-cpa.png",
+    "tipo": "imagem",
+    "url": "tv-conteudo/imagens/2-cpa.png"
   },
   {
-    "nome": "03-financiamento.mp4",
+    "nome": "03-amigo-indica.mp4",
     "tipo": "video",
-    "url": "tv-conteudo/videos/03-financiamento.mp4"
+    "url": "tv-conteudo/videos/03-amigo-indica.mp4"
   },
   {
-    "nome": "04-inscricao-gratis.mp4",
+    "nome": "05-financiamento.mp4",
     "tipo": "video",
-    "url": "tv-conteudo/videos/04-inscricao-gratis.mp4"
+    "url": "tv-conteudo/videos/05-financiamento.mp4"
+  },
+  {
+    "nome": "05-inscricao-gratis.mp4",
+    "tipo": "video",
+    "url": "tv-conteudo/videos/05-inscricao-gratis.mp4"
   }
 ]
