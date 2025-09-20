@@ -1,12 +1,7 @@
 [
   {
-    "nome": "01-amigo-indica.mp4",
-    "tipo": "video",
-    "url": "tv-conteudo/videos/01-amigo-indica.mp4"
-  },
-  {
-    "nome": "02 - nivelamento.mp4",
-    "tipo": "video",
-    "url": "tv-conteudo/videos/02 - nivelamento.mp4"
+    "nome": "1-locais-de-prova-tpi.png",
+    "tipo": "imagem",
+    "url": "tv-conteudo/imagens/1-locais-de-prova-tpi.png"
   }
 ]
