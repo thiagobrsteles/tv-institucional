@@ -1,17 +1,12 @@
 [
   {
-    "nome": "1-cpa-on.png",
+    "nome": "1-emaill.png",
     "tipo": "imagem",
-    "url": "tv-conteudo/imagens/1-cpa-on.png"
+    "url": "tv-conteudo/imagens/1-emaill.png"
   },
   {
-    "nome": "2-objetivos-da-cpa.png",
+    "nome": "2-email.png",
     "tipo": "imagem",
-    "url": "tv-conteudo/imagens/2-objetivos-da-cpa.png"
-  },
-  {
-    "nome": "3-cipa.png",
-    "tipo": "imagem",
-    "url": "tv-conteudo/imagens/3-cipa.png"
+    "url": "tv-conteudo/imagens/2-email.png"
   }
 ]
